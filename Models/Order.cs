@@ -10,8 +10,11 @@ namespace CafeteriaOnline.Website.Models
         public int ID { get; set; }
         public DateTime OrderDate { get; set; }
         public DateTime ModifiedDate { get; set; }
-        public virtual Employee Employee { get; set; }
-        public virtual ICollection<Meal> Meals { get; set; }
+        public int EmployeeID { get; set; }
+        public int MealID { get; set; }
+
+        public Employee Employee { get; set; }
+        public Meal Meal { get; set; }
 
     }
 }
