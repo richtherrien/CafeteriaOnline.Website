@@ -5,7 +5,7 @@ using System.Web;
 using System.Data.Entity;
 using CafeteriaOnline.Website.Models;
 
-namespace CafeteriaOnline.Website.DAL
+namespace CafeteriaOnline.Website.Data
 {
     public class CafeteriaInitializer : System.Data.Entity.DropCreateDatabaseIfModelChanges<CafeteriaContext>
     {

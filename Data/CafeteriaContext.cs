@@ -2,12 +2,12 @@
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
 
-namespace CafeteriaOnline.Website.DAL
+namespace CafeteriaOnline.Website.Data
 {
     public class CafeteriaContext : DbContext
     {
 
-        public CafeteriaContext() : base("CafeteriaContext")
+        public CafeteriaContext() : base("aspnet-CafeteriaOnline.Website")
         {
         }
 

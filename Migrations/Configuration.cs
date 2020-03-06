@@ -5,14 +5,14 @@
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<CafeteriaOnline.Website.DAL.CafeteriaContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<CafeteriaOnline.Website.Data.CafeteriaContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(CafeteriaOnline.Website.DAL.CafeteriaContext context)
+        protected override void Seed(CafeteriaOnline.Website.Data.CafeteriaContext context)
         {
             //  This method will be called after migrating to the latest version.
 
