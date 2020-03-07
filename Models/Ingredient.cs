@@ -10,5 +10,8 @@ namespace CafeteriaOnline.Website.Models
         public int ID { get; set; }
         public string Name { get; set; }
         public bool ActiveStatus { get; set; }
+
+        public ICollection<Meal> Meal { get; set; }
+
     }
 }

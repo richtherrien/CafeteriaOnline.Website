@@ -16,9 +16,11 @@ namespace CafeteriaOnline.Website.Models
         public MealType MealType { get; set; }
         public decimal Price { get; set; }
         public bool ActiveStatus { get; set; }
-        public virtual ICollection<Ingredient> BaseIngredients { get; set; }
-        public virtual ICollection<Ingredient> ConfigIngredients { get; set; }
         public string ImageUrl { get; set; }
+
+        public ICollection<Order> Orders { get; set; }
+        public ICollection<BaseMealIngredient> BaseMealIngredient { get; set; }
+        public ICollection<ConfigMealIngredient> ConfigMealIngredient { get; set; }
 
     }
 }
