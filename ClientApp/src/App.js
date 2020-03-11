@@ -1,3 +1,6 @@
+/*
+//Lines 4-29 is code originally generated when project was created,
+//untouched for reference.
 import React, { Component } from 'react';
 import { Route } from 'react-router';
 import { Layout } from './components/Layout';
@@ -22,5 +25,31 @@ export default class App extends Component {
         <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
       </Layout>
     );
+  }
+}
+*/
+
+import React, { Component } from 'react'
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import Navbar from './components/layout/Navbar'
+
+
+import './custom.css'
+import Landing from './components/pages/Landing'
+import Signin from './components/pages/Signin'
+
+export default class App extends Component {
+  render() {
+    return (
+      <BrowserRouter>
+        <div className="App">
+          <Navbar/>
+          <Switch>
+            <Route exact path='/' component={Landing}/>
+            <Route path='/signin' component={Signin}/>
+          </Switch>
+        </div>
+      </BrowserRouter>
+    )
   }
 }
