@@ -31,12 +31,12 @@ export default class App extends Component {
 
 import React, { Component } from 'react'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
-import Navbar from './components/layout/Navbar'
-
-
 import './custom.css'
+
+import Navbar from './components/layout/Navbar'
 import Landing from './components/pages/Landing'
 import Signin from './components/pages/Signin'
+import CompanyRegistration from './components/pages/CompanyRegistration'
 
 export default class App extends Component {
   render() {
@@ -47,6 +47,7 @@ export default class App extends Component {
           <Switch>
             <Route exact path='/' component={Landing}/>
             <Route path='/signin' component={Signin}/>
+            <Route path='/company-registration' component={CompanyRegistration}/>>
           </Switch>
         </div>
       </BrowserRouter>
