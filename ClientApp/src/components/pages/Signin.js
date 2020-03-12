@@ -25,16 +25,16 @@ export default class Signin extends Component {
                     <NavLink to='/' className="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-black mt-8 mr-4">Back</NavLink>
                 </div>
                 <div className="container p-20">
-                    <form onSubmit={this.handleSubmit} className="bg-teal-100 shadow-md rounded px-8 pt-6 pb-8 mb-4">
-                        <h1 className="grey-text text-darken-3 mb-4">Sign In</h1>
+                    <form onSubmit={this.handleSubmit} className="bg-teal-100 border-2 border-teal-500 shadow-lg rounded p-8 m-auto max-w-xl">
+                        <h1 className="text-gray-900 text-darken-3 mb-4">Sign In</h1>
                         {/*Email/Employee ID input */}
                         <div className="input-field">
-                            <label className="block text-gray-700 text-xl font-bold mb-2" htmlFor="username">Email/Employee ID</label>
+                            <label className="block text-gray-900 text-xl font-bold mb-2" htmlFor="username">Email/Employee ID</label>
                             <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="email" placeholder="Email/Employee ID" onChange={this.handleChange}/>
                         </div>
                         {/*Password input */}
                         <div className="input-field">
-                            <label className="block text-gray-700 text-xl font-bold mb-2 mt-4" htmlFor="password">Password</label>
+                            <label className="block text-gray-900 text-xl font-bold mb-2 mt-4" htmlFor="password">Password</label>
                             <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="Password" onChange={this.handleChange}/>
                         </div>
                         {/*Sign In button */}
