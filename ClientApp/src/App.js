@@ -37,6 +37,7 @@ import Navbar from './components/layout/Navbar'
 import Landing from './components/pages/Landing'
 import Signin from './components/pages/Signin'
 import CompanyRegistration from './components/pages/CompanyRegistration'
+import EmployeeRegistration from './components/pages/EmployeeRegistration'
 
 export default class App extends Component {
   render() {
@@ -46,7 +47,8 @@ export default class App extends Component {
           <Navbar/>
           <Switch>
             <Route exact path='/' component={Landing}/>
-            <Route path='/signin' component={Signin}/>
+            <Route path='/signin' component={Signin} />
+            <Route path='/employee-registration' component={EmployeeRegistration}/>>
             <Route path='/company-registration' component={CompanyRegistration}/>>
           </Switch>
         </div>
