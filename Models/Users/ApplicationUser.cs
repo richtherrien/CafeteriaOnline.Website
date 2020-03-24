@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace CafeteriaOnline.Website.Models
 {
+    // email, username, etc. are stored in IdentityUser
     public class ApplicationUser : IdentityUser
     {
-       // public virtual Employee Employee { get; set; }
-      //  public virtual Caterer Caterer { get; set; }
+        public string LastName { get; set; }
+        public string FirstName { get; set; }
     }
 }

@@ -1,20 +1,19 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace CafeteriaOnline.Website.Models
 {
-    public class Employee : IdentityUser
+    public class Employee : ApplicationUser
     {
-        [Key]
         public int EmployeeID { get; set; }
-        public int EmployeeNumber { get; set; }
-        public string LastName { get; set; }
-        public string FirstName { get; set; }
-
+        public decimal Balance { get; set; }
         public ICollection<Order> Orders { get; set; }
+        public int CafeteriaAddressID { get; set; }
+        public CafeteriaAddress CafeteriaAddresss { get; set; }
+        public int CompanyID { get; set; }
+        public Company Company { get; set; }
     }
 }
