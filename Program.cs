@@ -25,12 +25,22 @@ namespace CafeteriaOnline.Website
                     var serviceProvider = services.GetRequiredService<IServiceProvider>();
                     var configuration = services.GetRequiredService<IConfiguration>();
                     Seed.CreateRoles(serviceProvider, configuration).Wait();
-
                 }
                 catch (Exception exception)
                 {
                     var logger = services.GetRequiredService<ILogger<Program>>();
                     logger.LogError(exception, "An error occurred while creating roles");
+                }
+
+                try
+                {
+                    var context = services.GetRequiredService<CafeteriaContext>();
+                    CafeteriaInitializer.Initialize(context);
+                }
+                catch (Exception exception)
+                {
+                    var logger = services.GetRequiredService<ILogger<Program>>();
+                    logger.LogError(exception, "An error occurred while seeding database");
                 }
             }
 

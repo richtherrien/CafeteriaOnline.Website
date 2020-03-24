@@ -14,15 +14,13 @@ namespace CafeteriaOnline.Website.Data
         public DbSet<Cashier> Cashiers { get; set; }
         public DbSet<Caterer> Caterers { get; set; }
         public DbSet<Employee> Employees { get; set; }
-        public DbSet<Organizer> Organizer { get; set; }
-        public DbSet<Address> Addresses { get; set; }
+        public DbSet<Organizer> Organizers { get; set; }
+        public DbSet<CafeteriaAddress> CafeteriaAddresses { get; set; }
         public DbSet<Company> Companies { get; set; }
-        public DbSet<Ingredient> Ingredients { get; set; }
         public DbSet<Meal> Meals { get; set; }
         public DbSet<Order> Orders { get; set; }
-        public DbSet<BaseMealIngredient> BaseMealIngredients { get; set; }
-        public DbSet<ConfigMealIngredient> ConfigMealIngredients { get; set; }
-
+        public DbSet<MealConfiguration> MealConfigurations { get; set; }
+        public DbSet<CafeteriaFood> CafeteriaFoods { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
