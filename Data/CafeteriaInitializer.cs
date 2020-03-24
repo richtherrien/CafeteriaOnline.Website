@@ -11,9 +11,9 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace CafeteriaOnline.Website.Data
 {
-    public class CafeteriaInitializer : System.Data.Entity.DropCreateDatabaseIfModelChanges<CafeteriaContext>
+    public static class CafeteriaInitializer
     {
-        protected override void Seed(CafeteriaContext context)
+        public static void Initialize(CafeteriaContext context)
         {
             var companies = new List<Company>
             {
@@ -59,7 +59,7 @@ namespace CafeteriaOnline.Website.Data
                 new Organizer{UserName="Kenny", Email = "kenny@email.com", PasswordHash = passwordHasher.HashPassword("password"),  FirstName="Kenny", LastName="Rogers", CompanyID=3, CafeteriaAddressID=3},
             };
 
-            organizers.ForEach(s => context.Organizer.Add(s));
+            organizers.ForEach(s => context.Organizers.Add(s));
             context.SaveChanges();
 
             var caterers = new List<Caterer>

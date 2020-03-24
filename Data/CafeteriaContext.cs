@@ -14,7 +14,7 @@ namespace CafeteriaOnline.Website.Data
         public DbSet<Cashier> Cashiers { get; set; }
         public DbSet<Caterer> Caterers { get; set; }
         public DbSet<Employee> Employees { get; set; }
-        public DbSet<Organizer> Organizer { get; set; }
+        public DbSet<Organizer> Organizers { get; set; }
         public DbSet<CafeteriaAddress> CafeteriaAddresses { get; set; }
         public DbSet<Company> Companies { get; set; }
         public DbSet<Meal> Meals { get; set; }

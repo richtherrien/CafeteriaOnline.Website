@@ -14,6 +14,6 @@ namespace CafeteriaOnline.Website.Models
         public virtual ICollection<CafeteriaAddress> Addresses { get; set; }
         public virtual ICollection<Employee> Employees { get; set; }
         public int OrganizerID { get; set; }
-        public Organizer Head { get; set; }
+        public Organizer Organizer;
     }
 }

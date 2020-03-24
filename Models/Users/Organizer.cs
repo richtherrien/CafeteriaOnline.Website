@@ -10,6 +10,5 @@ namespace CafeteriaOnline.Website.Models
     {
         public int OrganizerID { get; set; }
         public Company HeadOf { get; set; }
-
     }
 }

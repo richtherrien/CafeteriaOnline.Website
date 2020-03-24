@@ -7,13 +7,13 @@ namespace CafeteriaOnline.Website.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.0")]
-    public sealed partial class AddModels : IMigrationMetadata
+    public sealed partial class AddedFullMigration : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddModels));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(AddedFullMigration));
         
         string IMigrationMetadata.Id
         {
-            get { return "202003061958535_AddModels"; }
+            get { return "202003241701465_AddedFullMigration"; }
         }
         
         string IMigrationMetadata.Source
