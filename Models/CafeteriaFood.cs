@@ -7,11 +7,10 @@ namespace CafeteriaOnline.Website.Models
 {
     public class CafeteriaFood
     {
-        public int CafeteriaFoodID { get; set; }
+        public int CafeteriaFoodId { get; set; }
         public string Name { get; set; }
         public MealType MealType { get; set; }
         public decimal Price { get; set; }
-        public ICollection<CafeteriaAddress> CafeteriaAddress { get; set; }
-
+        public virtual CafeteriaAddress CafeteriaAddress { get; set; }
     }
 }

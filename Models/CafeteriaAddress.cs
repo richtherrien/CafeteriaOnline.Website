@@ -7,11 +7,9 @@ namespace CafeteriaOnline.Website.Models
 {
     public class CafeteriaAddress
     {
-        public int CafeteriaAddressID { get; set; }
-        public int CompanyID { get; set; }
-        public Company Company { get; set; }
-        public int CashierID { get; set; }
-        public Cashier Cashier { get; set; }
+        public int CafeteriaAddressId { get; set; }
+        public virtual Company Company { get; set; }
+        public virtual Cashier Cashier { get; set; }
         public string StreetAddress { get; set; }
         public string StreetAddress2 { get; set; }
         public string City { get; set; }

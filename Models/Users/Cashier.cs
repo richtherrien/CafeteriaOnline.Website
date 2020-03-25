@@ -8,7 +8,6 @@ namespace CafeteriaOnline.Website.Models
 {
     public class Cashier : ApplicationUser
     {
-        public int CashierID { get; set; }
         public ICollection<CafeteriaAddress> CafeteriaAddress { get; set; }
     }
 }
