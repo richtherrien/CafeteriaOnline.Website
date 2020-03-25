@@ -2,12 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using CafeteriaOnline.Website.Data;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.DependencyInjection;
+using CafeteriaOnline.Website.Data;
 
 namespace CafeteriaOnline.Website
 {
@@ -35,12 +35,12 @@ namespace CafeteriaOnline.Website
                 try
                 {
                     var context = services.GetRequiredService<CafeteriaContext>();
-                    CafeteriaInitializer.Initialize(context);
+                    CafeteriaInitializer.Initialize(context: context);
                 }
-                catch (Exception exception)
+                catch (Exception ex)
                 {
                     var logger = services.GetRequiredService<ILogger<Program>>();
-                    logger.LogError(exception, "An error occurred while seeding database");
+                    logger.LogError(ex, "An error occurred while seeding the database.");
                 }
             }
 

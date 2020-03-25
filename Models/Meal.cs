@@ -11,15 +11,14 @@ namespace CafeteriaOnline.Website.Models
     }
     public class Meal
     {
-        public int MealID { get; set; }
+        public int MealId { get; set; }
         public string Name { get; set; }
         public MealType MealType { get; set; }
         public string Description { get; set; }
         public DateTime ValidUntil { get; set; }
         public string ImageUrl { get; set; }
         public ICollection<MealConfiguration> ConfigMealIngredient { get; set; }
-        public int CatererID { get; set; }
-        public Caterer Caterer { get; set; }
+        public virtual Caterer Caterer { get; set; }
 
     }
 }

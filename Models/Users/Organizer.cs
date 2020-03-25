@@ -8,7 +8,5 @@ namespace CafeteriaOnline.Website.Models
 {
     public class Organizer : Employee
     {
-        public int OrganizerID { get; set; }
-        public Company HeadOf { get; set; }
     }
 }

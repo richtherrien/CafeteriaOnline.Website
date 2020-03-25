@@ -1,5 +1,4 @@
-﻿using System;
-using CafeteriaOnline.Website.Data;
+using System;
 using CafeteriaOnline.Website.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -7,6 +6,7 @@ using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using MyWeb.Data;
 
 [assembly: HostingStartup(typeof(CafeteriaOnline.Website.Areas.Identity.IdentityHostingStartup))]
 namespace CafeteriaOnline.Website.Areas.Identity
@@ -16,6 +16,13 @@ namespace CafeteriaOnline.Website.Areas.Identity
         public void Configure(IWebHostBuilder builder)
         {
             builder.ConfigureServices((context, services) => {
+                services.AddDbContext<ApplicationDbContext>(options =>
+                    options.UseSqlServer(
+                        context.Configuration.GetConnectionString("ApplicationDbContextConnection")));
+
+                services.AddIdentity<ApplicationUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)
+                    .AddEntityFrameworkStores<ApplicationDbContext>()
+                    .AddDefaultTokenProviders();
             });
         }
     }
