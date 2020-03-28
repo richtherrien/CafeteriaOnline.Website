@@ -1,11 +1,12 @@
 ﻿
 using CafeteriaOnline.Website.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 
 namespace CafeteriaOnline.Website.Data
 {
-    public class CafeteriaContext : DbContext
+    public class CafeteriaContext : IdentityDbContext<ApplicationUser>
     {
 
         public CafeteriaContext(DbContextOptions<CafeteriaContext> options) : base(options)
@@ -24,10 +25,12 @@ namespace CafeteriaOnline.Website.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<Company>().ToTable("Company");
-            modelBuilder.Entity<Employee>().ToTable("Employee");
-            modelBuilder.Entity<Cashier>().ToTable("Cashier");
-            modelBuilder.Entity<Caterer>().ToTable("Caterer");
+           // modelBuilder.Entity<Employee>().ToTable("Employee");
+           // modelBuilder.Entity<Cashier>().ToTable("Cashier");
+          //  modelBuilder.Entity<Caterer>().ToTable("Caterer");
             modelBuilder.Entity<CafeteriaAddress>().ToTable("CafeteriaAddress");
             modelBuilder.Entity<Meal>().ToTable("Meal");
             modelBuilder.Entity<MealConfiguration>().ToTable("MealConfiguration");

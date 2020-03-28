@@ -31,6 +31,22 @@ namespace CafeteriaOnline.Website
             services.AddDbContext<CafeteriaContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddIdentity<ApplicationUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)
+                .AddEntityFrameworkStores<CafeteriaContext>()
+                .AddDefaultTokenProviders();
+
+            services.AddIdentityCore<Employee>()
+                .AddRoles<IdentityRole>()
+                .AddClaimsPrincipalFactory<UserClaimsPrincipalFactory<Employee, IdentityRole>>()
+                .AddEntityFrameworkStores<CafeteriaContext>()
+                .AddDefaultTokenProviders();
+
+           /* services.AddIdentityCore<Organizer>(options => options.SignIn.RequireConfirmedAccount = false)
+              .AddEntityFrameworkStores<CafeteriaContext>()
+              .AddDefaultTokenProviders();
+            services.AddScoped<RoleManager<Organizer>>();*/
+
             services.AddControllersWithViews();
             services.AddRazorPages();
         }
