@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using System.Data.Entity;
 using CafeteriaOnline.Website.Models;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNet.Identity;
+using System.Threading.Tasks;
 
 namespace CafeteriaOnline.Website.Data
 {
@@ -15,14 +11,14 @@ namespace CafeteriaOnline.Website.Data
     {
         public static void Initialize(CafeteriaContext context)
         {
-           // context.Database.EnsureCreated();
-            // Look for any Company.
+            // Look for any Company before seeding the database.
             if (context.Companies.Any())
             {
                 return;   // DB has been seeded
             }
             var passwordHasher = new PasswordHasher();
-           
+
+
             var caterers = new List<Caterer>
             {
                 new Caterer{UserName="Mancy", Email = "mancy@email.com", PasswordHash = passwordHasher.HashPassword("password"), FirstName="Mancy", LastName="Raider"},
@@ -85,6 +81,21 @@ namespace CafeteriaOnline.Website.Data
             organizers.ForEach(s => context.Organizers.Add(s));
             context.SaveChanges();
 
+            caterers.ForEach(s => {
+                AddToUsersRoles(s, context, 0).Wait();
+            });
+
+            employees.ForEach(s => {
+                AddToUsersRoles(s, context, 1).Wait();
+            });
+
+            organizers.ForEach(s => {
+                AddToUsersRoles(s, context, 2).Wait();
+            });
+
+            cashiers.ForEach(s => {
+                AddToUsersRoles(s, context, 3).Wait();
+            });
             var meals = new List<Meal>
             {
                 new Meal{Caterer=caterers[0], Name="Burger", MealType=MealType.Entrée, Description="A classic hamburger", 
@@ -179,6 +190,30 @@ namespace CafeteriaOnline.Website.Data
 
             orders.ForEach(s => context.Orders.Add(s));
             context.SaveChanges();
+        }
+
+        //  public static async void AddToUsersRoles(List<Employee> employees, List<Caterer> caterers, List<Organizer> organizers, List<Cashier> cashiers, CafeteriaContext context) {
+        public static async Task AddToUsersRoles(ApplicationUser user, CafeteriaContext context, int i)
+        {
+            var userStore = new Microsoft.AspNetCore.Identity.EntityFrameworkCore.UserStore<ApplicationUser>(context);
+            switch (i)
+            {
+                case 0:
+                    await userStore.AddToRoleAsync(user, "Caterer");
+                    break;
+                case 1:
+                    await userStore.AddToRoleAsync(user, "Employee");
+                    break;
+                case 2:
+                    await userStore.AddToRoleAsync(user, "Organizer");
+                    break;
+                case 3:
+                    await userStore.AddToRoleAsync(user, "Cashier");
+                    break;
+                default:
+                    break;
+            }
+            await context.SaveChangesAsync();
         }
 
         internal static void Initialize(ApplicationDbContext context)
