@@ -23,9 +23,36 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
+                        @if (User.IsInRole("Caterer") || User.IsInRole("Cashier"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Orders" asp-action="">Orders</a>
+                            </li>
+                        }
+                        @if (User.IsInRole("Caterer"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Meals" asp-action="">Meals</a>
+                            </li>
+                        }
+                        @if (User.IsInRole("Caterer"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="MealConfigurations" asp-action="">MealConfigurations</a>
+                            </li>
+                        }
+                        @if (User.IsInRole("Caterer"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Companies" asp-action="">Companies</a>
+                            </li>
+                        }
+                        @if (User.IsInRole("Caterer"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="CafeteriaFoods" asp-action="">CafeteriaFoods</a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>

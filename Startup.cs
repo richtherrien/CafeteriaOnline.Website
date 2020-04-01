@@ -13,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using CafeteriaOnline.Website.Models;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace CafeteriaOnline.Website
 {
@@ -39,6 +40,11 @@ namespace CafeteriaOnline.Website
 
             services.AddControllersWithViews();
             services.AddRazorPages();
+            services.PostConfigure<CookieAuthenticationOptions>(IdentityConstants.ApplicationScheme,
+                opt =>
+                {
+                    opt.LoginPath = "/Identity/Account/Login";
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

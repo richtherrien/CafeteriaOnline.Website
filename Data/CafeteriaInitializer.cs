@@ -18,10 +18,9 @@ namespace CafeteriaOnline.Website.Data
             }
             var passwordHasher = new PasswordHasher();
 
-
             var caterers = new List<Caterer>
             {
-                new Caterer{UserName="Mancy", Email = "mancy@email.com", PasswordHash = passwordHasher.HashPassword("password"), FirstName="Mancy", LastName="Raider"},
+                new Caterer{UserName="mancy@email.com", NormalizedUserName="MANCY@EMAIL.COM", Email = "mancy@email.com", PasswordHash = passwordHasher.HashPassword("Password1!"), FirstName="Mancy", LastName="Raider"},
             };
 
             caterers.ForEach(s => context.Caterers.Add(s));
@@ -29,7 +28,7 @@ namespace CafeteriaOnline.Website.Data
 
             var cashiers = new List<Cashier>
             {
-                new Cashier{UserName="Cathy", Email = "mancy@email.com", PasswordHash = passwordHasher.HashPassword("password"), FirstName="Cathy", LastName="Cashier"},
+                new Cashier{UserName="cathy@email.com", NormalizedUserName="CATHY@EMAIL.COM", Email = "cathy@email.com", PasswordHash = passwordHasher.HashPassword("Password1!"), FirstName="Cathy", LastName="Cashier"},
             };
 
             cashiers.ForEach(s => context.Cashiers.Add(s));
@@ -57,15 +56,15 @@ namespace CafeteriaOnline.Website.Data
 
             var employees = new List<Employee>
             {
-                new Employee{UserName="Logan", Email = "logan@email.com", PasswordHash = passwordHasher.HashPassword("password"), FirstName="Logan", LastName="James", Company=companies[0], CafeteriaAddress=cafeteriaAddresses[0]},
-                new Employee{UserName="Blazor", Email = "blazor@email.com", PasswordHash = passwordHasher.HashPassword("password"), FirstName="Blazor", LastName="Raze", Company=companies[0], CafeteriaAddress=cafeteriaAddresses[0]},
-                new Employee{UserName="Mance", Email = "mance@email.com", PasswordHash = passwordHasher.HashPassword("password"), FirstName="Mance", LastName="Raider", Company=companies[0], CafeteriaAddress=cafeteriaAddresses[0]},
-                new Employee{UserName="Maxwell", Email = "maxwell@email.com", PasswordHash = passwordHasher.HashPassword("password"), FirstName="Maxwell", LastName="Cruze", Company=companies[1], CafeteriaAddress=cafeteriaAddresses[1]},
-                new Employee{UserName="Janet", Email = "janet@email.com", PasswordHash = passwordHasher.HashPassword("password"), FirstName="Janet", LastName="Planet", Company=companies[1], CafeteriaAddress=cafeteriaAddresses[1]},
-                new Employee{UserName="Bobert", Email = "bobert@email.com", PasswordHash = passwordHasher.HashPassword("password"), FirstName="Bobert", LastName="Simth", Company=companies[1], CafeteriaAddress=cafeteriaAddresses[1]},
-                new Employee{UserName="Stefan", Email = "stefan@email.com", PasswordHash = passwordHasher.HashPassword("password"), FirstName="Stefan", LastName="Kelly", Company=companies[2], CafeteriaAddress=cafeteriaAddresses[2]},
-                new Employee{UserName="Brackston", Email = "brackston@email.com", PasswordHash = passwordHasher.HashPassword("password"), FirstName="Brackston", LastName="Janor", Company=companies[2], CafeteriaAddress=cafeteriaAddresses[2]},
-                new Employee{UserName="Chad", Email = "chad@email.com", PasswordHash = passwordHasher.HashPassword("password"), FirstName="Chad", LastName="Dickensten", Company=companies[2], CafeteriaAddress=cafeteriaAddresses[2]},
+                new Employee{UserName="logan@email.com", NormalizedUserName="LOGAN@EMAIL.COM", Email = "logan@email.com", PasswordHash = passwordHasher.HashPassword("Password1!"), FirstName="Logan", LastName="James", Company=companies[0], CafeteriaAddress=cafeteriaAddresses[0]},
+                new Employee{UserName="blazor@email.com", NormalizedUserName="BLAZOR@EMAIL.COM", Email = "blazor@email.com", PasswordHash = passwordHasher.HashPassword("Password1!"), FirstName="Blazor", LastName="Raze", Company=companies[0], CafeteriaAddress=cafeteriaAddresses[0]},
+                new Employee{UserName="mance@email.com", NormalizedUserName="MANCE@EMAIL.COM", Email = "mance@email.com", PasswordHash = passwordHasher.HashPassword("Password1!"), FirstName="Mance", LastName="Raider", Company=companies[0], CafeteriaAddress=cafeteriaAddresses[0]},
+                new Employee{UserName="maxwell@email.com", NormalizedUserName="MAXWELL@EMAIL.COM", Email = "maxwell@email.com", PasswordHash = passwordHasher.HashPassword("Password1!"), FirstName="Maxwell", LastName="Cruze", Company=companies[1], CafeteriaAddress=cafeteriaAddresses[1]},
+                new Employee{UserName="janet@email.com", NormalizedUserName="JANET@EMAIL.COM", Email = "janet@email.com", PasswordHash = passwordHasher.HashPassword("Password1!"), FirstName="Janet", LastName="Planet", Company=companies[1], CafeteriaAddress=cafeteriaAddresses[1]},
+                new Employee{UserName="bobert@email.com", NormalizedUserName="BOBERT@EMAIL.COM", Email = "bobert@email.com", PasswordHash = passwordHasher.HashPassword("Password1!"), FirstName="Bobert", LastName="Simth", Company=companies[1], CafeteriaAddress=cafeteriaAddresses[1]},
+                new Employee{UserName="stefan@email.com", NormalizedUserName="STEFAN@EMAIL.COM", Email = "stefan@email.com", PasswordHash = passwordHasher.HashPassword("Password1!"), FirstName="Stefan", LastName="Kelly", Company=companies[2], CafeteriaAddress=cafeteriaAddresses[2]},
+                new Employee{UserName="brackston@email.com", NormalizedUserName="BRACKSTON@EMAIL.COM", Email = "brackston@email.com", PasswordHash = passwordHasher.HashPassword("Password1!"), FirstName="Brackston", LastName="Janor", Company=companies[2], CafeteriaAddress=cafeteriaAddresses[2]},
+                new Employee{UserName="chad@email.com", NormalizedUserName="CHAD@EMAIL.COM", Email = "chad@email.com", PasswordHash = passwordHasher.HashPassword("Password1!"), FirstName="Chad", LastName="Dickensten", Company=companies[2], CafeteriaAddress=cafeteriaAddresses[2]},
             };
 
             employees.ForEach(s => context.Employees.Add(s));
@@ -73,9 +72,9 @@ namespace CafeteriaOnline.Website.Data
 
             var organizers = new List<Organizer>
             {
-                new Organizer{UserName="Carol", Email = "carol@email.com", PasswordHash = passwordHasher.HashPassword("password"), FirstName="Carol", LastName="Sherrly", Company=companies[0],  CafeteriaAddress=cafeteriaAddresses[0]},
-                new Organizer{UserName="Jane", Email = "jane@email.com", PasswordHash = passwordHasher.HashPassword("password"), FirstName="Jane", LastName="Mattenson", Company=companies[1],  CafeteriaAddress=cafeteriaAddresses[1]},
-                new Organizer{UserName="Kenny", Email = "kenny@email.com", PasswordHash = passwordHasher.HashPassword("password"),  FirstName="Kenny", LastName="Rogers", Company=companies[2], CafeteriaAddress=cafeteriaAddresses[2]},
+                new Organizer{UserName="carol@email.com", NormalizedUserName="CAROL@EMAIL.COM", Email = "carol@email.com", PasswordHash = passwordHasher.HashPassword("Password1!"), FirstName="Carol", LastName="Sherrly", Company=companies[0],  CafeteriaAddress=cafeteriaAddresses[0]},
+                new Organizer{UserName="jane@email.com", NormalizedUserName="JANE@EMAIL.COM", Email = "jane@email.com", PasswordHash = passwordHasher.HashPassword("Password1!"), FirstName="Jane", LastName="Mattenson", Company=companies[1],  CafeteriaAddress=cafeteriaAddresses[1]},
+                new Organizer{UserName="kenny@email.com", NormalizedUserName="KENNY@EMAIL.COM", Email = "kenny@email.com", PasswordHash = passwordHasher.HashPassword("Password1!"),  FirstName="Kenny", LastName="Rogers", Company=companies[2], CafeteriaAddress=cafeteriaAddresses[2]},
             };
 
             organizers.ForEach(s => context.Organizers.Add(s));
