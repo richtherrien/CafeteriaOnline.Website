@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CafeteriaOnline.Website.Data;
 using CafeteriaOnline.Website.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CafeteriaOnline.Website.Controllers
 {
+    [Authorize(Roles = "Caterer")]
     public class MealsController : Controller
     {
         private readonly CafeteriaContext _context;
