@@ -13,6 +13,9 @@
     <thead>
         <tr>
             <th>
+                @Html.DisplayNameFor(model => model.ImageUrl)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Name)
             </th>
             <th>
@@ -25,7 +28,7 @@
                 @Html.DisplayNameFor(model => model.ValidUntil)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ImageUrl)
+                @Html.DisplayNameFor(model => model.Caterer)
             </th>
             <th></th>
         </tr>
@@ -33,6 +36,11 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
+            <td>
+                <a href="@item.ImageUrl">
+                    <img src="@item.ImageUrl" style="position:relative;width:60px;height:60px;overflow:hidden;border-radius:50%;" />
+                </a>
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
@@ -46,7 +54,7 @@
                 @Html.DisplayFor(modelItem => item.ValidUntil)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ImageUrl)
+                @Html.DisplayFor(modelItem => item.Caterer.Id)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.MealId">Edit</a> |

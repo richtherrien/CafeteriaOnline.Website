@@ -18,6 +18,7 @@ namespace CafeteriaOnline.Website.Models
         public DateTime ValidUntil { get; set; }
         public string ImageUrl { get; set; }
         public ICollection<MealConfiguration> ConfigMealIngredient { get; set; }
+        public string CatererId { get; set; }
         public virtual Caterer Caterer { get; set; }
 
     }

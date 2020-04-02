@@ -24,7 +24,8 @@ namespace CafeteriaOnline.Website.Controllers
         // GET: MealConfigurations
         public async Task<IActionResult> Index()
         {
-            return View(await _context.MealConfigurations.ToListAsync());
+            var cafeteriaContext = _context.MealConfigurations.Include(m => m.Meal);
+            return View(await cafeteriaContext.ToListAsync());
         }
 
         // GET: MealConfigurations/Details/5
@@ -36,6 +37,7 @@ namespace CafeteriaOnline.Website.Controllers
             }
 
             var mealConfiguration = await _context.MealConfigurations
+                .Include(m => m.Meal)
                 .FirstOrDefaultAsync(m => m.MealConfigurationId == id);
             if (mealConfiguration == null)
             {
@@ -48,6 +50,7 @@ namespace CafeteriaOnline.Website.Controllers
         // GET: MealConfigurations/Create
         public IActionResult Create()
         {
+            ViewData["MealId"] = new SelectList(_context.Meals, "MealId", "MealId");
             return View();
         }
 
@@ -56,7 +59,7 @@ namespace CafeteriaOnline.Website.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("MealConfigurationId,Ingredients,Price")] MealConfiguration mealConfiguration)
+        public async Task<IActionResult> Create([Bind("MealConfigurationId,MealId,Ingredients,Price")] MealConfiguration mealConfiguration)
         {
             if (ModelState.IsValid)
             {
@@ -64,6 +67,7 @@ namespace CafeteriaOnline.Website.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["MealId"] = new SelectList(_context.Meals, "MealId", "MealId", mealConfiguration.MealId);
             return View(mealConfiguration);
         }
 
@@ -80,6 +84,7 @@ namespace CafeteriaOnline.Website.Controllers
             {
                 return NotFound();
             }
+            ViewData["MealId"] = new SelectList(_context.Meals, "MealId", "MealId", mealConfiguration.MealId);
             return View(mealConfiguration);
         }
 
@@ -88,7 +93,7 @@ namespace CafeteriaOnline.Website.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("MealConfigurationId,Ingredients,Price")] MealConfiguration mealConfiguration)
+        public async Task<IActionResult> Edit(int id, [Bind("MealConfigurationId,MealId,Ingredients,Price")] MealConfiguration mealConfiguration)
         {
             if (id != mealConfiguration.MealConfigurationId)
             {
@@ -115,6 +120,7 @@ namespace CafeteriaOnline.Website.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["MealId"] = new SelectList(_context.Meals, "MealId", "MealId", mealConfiguration.MealId);
             return View(mealConfiguration);
         }
 
@@ -127,6 +133,7 @@ namespace CafeteriaOnline.Website.Controllers
             }
 
             var mealConfiguration = await _context.MealConfigurations
+                .Include(m => m.Meal)
                 .FirstOrDefaultAsync(m => m.MealConfigurationId == id);
             if (mealConfiguration == null)
             {
