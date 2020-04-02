@@ -103,13 +103,16 @@ namespace CafeteriaOnline.Website.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("CashierId")
+                        .HasColumnType("int");
+
                     b.Property<string>("CashierId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("City")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("CompanyId")
+                    b.Property<int>("CompanyId")
                         .HasColumnType("int");
 
                     b.Property<string>("Country")
@@ -143,7 +146,7 @@ namespace CafeteriaOnline.Website.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("CafeteriaAddressId")
+                    b.Property<int>("CafeteriaAddressId")
                         .HasColumnType("int");
 
                     b.Property<int>("MealType")
@@ -225,7 +228,7 @@ namespace CafeteriaOnline.Website.Data.Migrations
                     b.Property<string>("Ingredients")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("MealId")
+                    b.Property<int>("MealId")
                         .HasColumnType("int");
 
                     b.Property<decimal>("Price")
@@ -251,7 +254,7 @@ namespace CafeteriaOnline.Website.Data.Migrations
                     b.Property<DateTime>("ForDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("MealConfigurationId")
+                    b.Property<int>("MealConfigurationId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("ModifiedDate")
@@ -430,10 +433,10 @@ namespace CafeteriaOnline.Website.Data.Migrations
                     b.Property<decimal>("Balance")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int?>("CafeteriaAddressId")
+                    b.Property<int>("CafeteriaAddressId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("CompanyId")
+                    b.Property<int>("CompanyId")
                         .HasColumnType("int");
 
                     b.HasIndex("CafeteriaAddressId");
@@ -458,14 +461,18 @@ namespace CafeteriaOnline.Website.Data.Migrations
 
                     b.HasOne("CafeteriaOnline.Website.Models.Company", "Company")
                         .WithMany("Addresses")
-                        .HasForeignKey("CompanyId");
+                        .HasForeignKey("CompanyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("CafeteriaOnline.Website.Models.CafeteriaFood", b =>
                 {
                     b.HasOne("CafeteriaOnline.Website.Models.CafeteriaAddress", "CafeteriaAddress")
                         .WithMany("CafeteriaFood")
-                        .HasForeignKey("CafeteriaAddressId");
+                        .HasForeignKey("CafeteriaAddressId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("CafeteriaOnline.Website.Models.Meal", b =>
@@ -479,7 +486,9 @@ namespace CafeteriaOnline.Website.Data.Migrations
                 {
                     b.HasOne("CafeteriaOnline.Website.Models.Meal", "Meal")
                         .WithMany("ConfigMealIngredient")
-                        .HasForeignKey("MealId");
+                        .HasForeignKey("MealId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("CafeteriaOnline.Website.Models.Order", b =>
@@ -490,7 +499,9 @@ namespace CafeteriaOnline.Website.Data.Migrations
 
                     b.HasOne("CafeteriaOnline.Website.Models.MealConfiguration", "MealConfiguration")
                         .WithMany("Order")
-                        .HasForeignKey("MealConfigurationId");
+                        .HasForeignKey("MealConfigurationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -548,11 +559,15 @@ namespace CafeteriaOnline.Website.Data.Migrations
                 {
                     b.HasOne("CafeteriaOnline.Website.Models.CafeteriaAddress", "CafeteriaAddress")
                         .WithMany("Employee")
-                        .HasForeignKey("CafeteriaAddressId");
+                        .HasForeignKey("CafeteriaAddressId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("CafeteriaOnline.Website.Models.Company", "Company")
                         .WithMany("Employees")
-                        .HasForeignKey("CompanyId");
+                        .HasForeignKey("CompanyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

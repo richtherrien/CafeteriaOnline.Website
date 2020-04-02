@@ -17,7 +17,9 @@ namespace CafeteriaOnline.Website.Models
     public class Order
     {
         public int OrderId { get; set; }
+        public string EmployeeId { get; set; }
         public virtual Employee Employee { get; set; }
+        public int MealConfigurationId { get; set; }
         public virtual MealConfiguration MealConfiguration { get; set; }
         public DateTime OrderDate { get; set; }
         public DateTime ModifiedDate { get; set; }

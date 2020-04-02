@@ -20,7 +20,14 @@
             </div>
             <div class="form-group">
                 <label asp-for="MealType" class="control-label"></label>
-                <select asp-for="MealType" class="form-control"></select>
+                <select asp-for="MealType" class="form-control">
+                    <option value="0">Appetizer</option>
+                    <option value="1">Beverage</option>
+                    <option value="2">Dessert</option>
+                    <option value="3">Entrée</option>
+                    <option value="4">Greens</option>
+                    <option value="5">Pastry</option>
+                </select>
                 <span asp-validation-for="MealType" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -37,6 +44,11 @@
                 <label asp-for="ImageUrl" class="control-label"></label>
                 <input asp-for="ImageUrl" class="form-control" />
                 <span asp-validation-for="ImageUrl" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CatererId" class="control-label"></label>
+                <select asp-for="CatererId" class="form-control" asp-items="ViewBag.CatererId"></select>
+                <span asp-validation-for="CatererId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />

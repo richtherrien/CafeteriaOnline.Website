@@ -44,6 +44,8 @@ namespace CafeteriaOnline.Website
                 opt =>
                 {
                     opt.LoginPath = "/Identity/Account/Login";
+                    opt.AccessDeniedPath = "/Identity/Account/AccessDenied";
+
                 });
         }
 
