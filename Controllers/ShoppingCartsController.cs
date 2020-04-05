@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CafeteriaOnline.Website.Data;
@@ -8,8 +7,6 @@ using CafeteriaOnline.Website.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 
 namespace CafeteriaOnline.Website.Controllers
 {
@@ -44,7 +41,7 @@ namespace CafeteriaOnline.Website.Controllers
         {
             List<OrderItem> cart = GetCart();
 
-            var mealConfiguration = await _context.MealConfigurations.FindAsync(id);
+            var mealConfiguration = await _context.MealConfigurations.Include(n => n.Meal).SingleOrDefaultAsync(i => i.MealConfigurationId == id);
             if (mealConfiguration == null)
             {
                 return NotFound();

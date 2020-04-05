@@ -7,7 +7,12 @@ namespace CafeteriaOnline.Website.Helpers
     {
         public static void Set(this ISession session, string key, object value)
         {
-            session.SetString(key, JsonConvert.SerializeObject(value));
+            session.SetString(key, JsonConvert.SerializeObject(value, Formatting.Indented,
+                new JsonSerializerSettings()
+                {
+                    ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                }
+            ));
         }
 
         public static T Get<T>(this ISession session, string key)
