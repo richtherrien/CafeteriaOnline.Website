@@ -7,11 +7,9 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CafeteriaOnline.Website.Data;
 using CafeteriaOnline.Website.Models;
-using Microsoft.AspNetCore.Authorization;
 
 namespace CafeteriaOnline.Website.Controllers
 {
-    [Authorize(Roles = "Caterer,Cashier")]
     public class OrdersController : Controller
     {
         private readonly CafeteriaContext _context;
@@ -24,7 +22,7 @@ namespace CafeteriaOnline.Website.Controllers
         // GET: Orders
         public async Task<IActionResult> Index()
         {
-            var cafeteriaContext = _context.Orders.Include(o => o.Employee).Include(o => o.MealConfiguration);
+            var cafeteriaContext = _context.Orders.Include(o => o.Employee);
             return View(await cafeteriaContext.ToListAsync());
         }
 
@@ -38,7 +36,6 @@ namespace CafeteriaOnline.Website.Controllers
 
             var order = await _context.Orders
                 .Include(o => o.Employee)
-                .Include(o => o.MealConfiguration)
                 .FirstOrDefaultAsync(m => m.OrderId == id);
             if (order == null)
             {
@@ -52,7 +49,6 @@ namespace CafeteriaOnline.Website.Controllers
         public IActionResult Create()
         {
             ViewData["EmployeeId"] = new SelectList(_context.Employees, "Id", "Id");
-            ViewData["MealConfigurationId"] = new SelectList(_context.MealConfigurations, "MealConfigurationId", "MealConfigurationId");
             return View();
         }
 
@@ -61,7 +57,7 @@ namespace CafeteriaOnline.Website.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("OrderId,EmployeeId,MealConfigurationId,OrderDate,ModifiedDate,ForDate,Quantity,PaidStatus,OrderStatus")] Order order)
+        public async Task<IActionResult> Create([Bind("OrderId,EmployeeId,OrderDate,ModifiedDate,ForDate,PaidStatus,OrderStatus")] Order order)
         {
             if (ModelState.IsValid)
             {
@@ -70,7 +66,6 @@ namespace CafeteriaOnline.Website.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["EmployeeId"] = new SelectList(_context.Employees, "Id", "Id", order.EmployeeId);
-            ViewData["MealConfigurationId"] = new SelectList(_context.MealConfigurations, "MealConfigurationId", "MealConfigurationId", order.MealConfigurationId);
             return View(order);
         }
 
@@ -88,7 +83,6 @@ namespace CafeteriaOnline.Website.Controllers
                 return NotFound();
             }
             ViewData["EmployeeId"] = new SelectList(_context.Employees, "Id", "Id", order.EmployeeId);
-            ViewData["MealConfigurationId"] = new SelectList(_context.MealConfigurations, "MealConfigurationId", "MealConfigurationId", order.MealConfigurationId);
             return View(order);
         }
 
@@ -97,7 +91,7 @@ namespace CafeteriaOnline.Website.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("OrderId,EmployeeId,MealConfigurationId,OrderDate,ModifiedDate,ForDate,Quantity,PaidStatus,OrderStatus")] Order order)
+        public async Task<IActionResult> Edit(int id, [Bind("OrderId,EmployeeId,OrderDate,ModifiedDate,ForDate,PaidStatus,OrderStatus")] Order order)
         {
             if (id != order.OrderId)
             {
@@ -125,7 +119,6 @@ namespace CafeteriaOnline.Website.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["EmployeeId"] = new SelectList(_context.Employees, "Id", "Id", order.EmployeeId);
-            ViewData["MealConfigurationId"] = new SelectList(_context.MealConfigurations, "MealConfigurationId", "MealConfigurationId", order.MealConfigurationId);
             return View(order);
         }
 
@@ -139,7 +132,6 @@ namespace CafeteriaOnline.Website.Controllers
 
             var order = await _context.Orders
                 .Include(o => o.Employee)
-                .Include(o => o.MealConfiguration)
                 .FirstOrDefaultAsync(m => m.OrderId == id);
             if (order == null)
             {

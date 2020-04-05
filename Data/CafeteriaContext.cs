@@ -22,20 +22,19 @@ namespace CafeteriaOnline.Website.Data
         public DbSet<MealConfiguration> MealConfigurations { get; set; }
         public DbSet<CafeteriaFood> CafeteriaFoods { get; set; }
         public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderItem> OrderItems { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<Company>().ToTable("Company");
-           // modelBuilder.Entity<Employee>().ToTable("Employee");
-           // modelBuilder.Entity<Cashier>().ToTable("Cashier");
-          //  modelBuilder.Entity<Caterer>().ToTable("Caterer");
             modelBuilder.Entity<CafeteriaAddress>().ToTable("CafeteriaAddress");
             modelBuilder.Entity<Meal>().ToTable("Meal");
             modelBuilder.Entity<MealConfiguration>().ToTable("MealConfiguration");
             modelBuilder.Entity<CafeteriaFood>().ToTable("CafeteriaFood");
             modelBuilder.Entity<Order>().ToTable("Order");
+            modelBuilder.Entity<OrderItem>().ToTable("OrderItem");
         }
     }
 }

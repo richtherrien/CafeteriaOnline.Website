@@ -172,27 +172,54 @@ namespace CafeteriaOnline.Website.Data
 
             var orders = new List<Order>
             {
-                new Order{Employee=employees[0], MealConfiguration=mealConfiguration[0], OrderDate=new DateTime(2020, 2, 25), ModifiedDate=new DateTime(2020, 2, 25), ForDate=new DateTime(2020, 2, 28), PaidStatus=PaidStatus.Cash, OrderStatus=OrderStatus.Complete, Quantity=1},
-                new Order{Employee=employees[1], MealConfiguration=mealConfiguration[2], OrderDate=new DateTime(2020, 2, 25), ModifiedDate=new DateTime(2020, 2, 25), ForDate=new DateTime(2020, 2, 28), PaidStatus=PaidStatus.Credit, OrderStatus=OrderStatus.Complete, Quantity=1},
-                new Order{Employee=employees[2], MealConfiguration=mealConfiguration[1], OrderDate=new DateTime(2020, 2, 25), ModifiedDate=new DateTime(2020, 2, 25), ForDate=new DateTime(2020, 2, 28), PaidStatus=PaidStatus.Account, OrderStatus=OrderStatus.Complete, Quantity=1},
-                new Order{Employee=employees[3], MealConfiguration=mealConfiguration[6], OrderDate=new DateTime(2020, 2, 25), ModifiedDate=new DateTime(2020, 2, 25), ForDate=new DateTime(2020, 2, 28), PaidStatus=PaidStatus.Cash, OrderStatus=OrderStatus.Complete, Quantity=1},
-                new Order{Employee=employees[4], MealConfiguration=mealConfiguration[4], OrderDate=new DateTime(2020, 2, 25), ModifiedDate=new DateTime(2020, 2, 25), ForDate=new DateTime(2020, 2, 28), PaidStatus=PaidStatus.Credit, OrderStatus=OrderStatus.Complete, Quantity=1},
-                new Order{Employee=employees[5], MealConfiguration=mealConfiguration[7], OrderDate=new DateTime(2020, 2, 25), ModifiedDate=new DateTime(2020, 2, 25), ForDate=new DateTime(2020, 2, 28), PaidStatus=PaidStatus.Unpaid, OrderStatus=OrderStatus.Complete, Quantity=1},
+                new Order{Employee=employees[0], OrderDate=new DateTime(2020, 2, 25), ModifiedDate=new DateTime(2020, 2, 25), ForDate=new DateTime(2020, 2, 28), PaidStatus=PaidStatus.Cash, OrderStatus=OrderStatus.Complete },
+                new Order{Employee=employees[1], OrderDate=new DateTime(2020, 2, 25), ModifiedDate=new DateTime(2020, 2, 25), ForDate=new DateTime(2020, 2, 28), PaidStatus=PaidStatus.Credit, OrderStatus=OrderStatus.Complete},
+                new Order{Employee=employees[2], OrderDate=new DateTime(2020, 2, 25), ModifiedDate=new DateTime(2020, 2, 25), ForDate=new DateTime(2020, 2, 28), PaidStatus=PaidStatus.Account, OrderStatus=OrderStatus.Complete},
+                new Order{Employee=employees[3], OrderDate=new DateTime(2020, 2, 25), ModifiedDate=new DateTime(2020, 2, 25), ForDate=new DateTime(2020, 2, 28), PaidStatus=PaidStatus.Cash, OrderStatus=OrderStatus.Complete},
+                new Order{Employee=employees[4], OrderDate=new DateTime(2020, 2, 25), ModifiedDate=new DateTime(2020, 2, 25), ForDate=new DateTime(2020, 2, 28), PaidStatus=PaidStatus.Credit, OrderStatus=OrderStatus.Complete},
+                new Order{Employee=employees[5], OrderDate=new DateTime(2020, 2, 25), ModifiedDate=new DateTime(2020, 2, 25), ForDate=new DateTime(2020, 2, 28), PaidStatus=PaidStatus.Unpaid, OrderStatus=OrderStatus.Complete},
 
-                new Order{Employee=employees[6], MealConfiguration=mealConfiguration[3], OrderDate=new DateTime(2020, 3, 25), ModifiedDate=new DateTime(2020, 2, 25), ForDate=new DateTime(2020, 3, 28), PaidStatus=PaidStatus.Cash, OrderStatus=OrderStatus.Complete, Quantity=1},
-                new Order{Employee=employees[7], MealConfiguration=mealConfiguration[15], OrderDate=new DateTime(2020, 3, 25), ModifiedDate=new DateTime(2020, 2, 25), ForDate=new DateTime(2020, 3, 27), PaidStatus=PaidStatus.Credit, OrderStatus=OrderStatus.Complete, Quantity=1},
-                new Order{Employee=employees[8], MealConfiguration=mealConfiguration[13], OrderDate=new DateTime(2020, 3, 25), ModifiedDate=new DateTime(2020, 2, 25), ForDate=new DateTime(2020, 3, 28), PaidStatus=PaidStatus.Account, OrderStatus=OrderStatus.Complete, Quantity=1},
-                new Order{Employee=employees[0], MealConfiguration=mealConfiguration[14], OrderDate=new DateTime(2020, 3, 25), ModifiedDate=new DateTime(2020, 2, 25), ForDate=new DateTime(2020, 4, 1), PaidStatus=PaidStatus.Cash, OrderStatus=OrderStatus.Complete, Quantity=1},
-                new Order{Employee=employees[1], MealConfiguration=mealConfiguration[9], OrderDate=new DateTime(2020, 3, 25), ModifiedDate=new DateTime(2020, 2, 25), ForDate=new DateTime(2020, 4, 2), PaidStatus=PaidStatus.Credit, OrderStatus=OrderStatus.Complete, Quantity=1},
-                new Order{Employee=employees[2], MealConfiguration=mealConfiguration[8], OrderDate=new DateTime(2020, 3, 25), ModifiedDate=new DateTime(2020, 2, 25), ForDate=new DateTime(2020, 4, 5), PaidStatus=PaidStatus.Unpaid, OrderStatus=OrderStatus.Complete, Quantity=1},
+                new Order{Employee=employees[6], OrderDate=new DateTime(2020, 3, 25), ModifiedDate=new DateTime(2020, 2, 25), ForDate=new DateTime(2020, 3, 28), PaidStatus=PaidStatus.Cash, OrderStatus=OrderStatus.Complete},
+                new Order{Employee=employees[7], OrderDate=new DateTime(2020, 3, 25), ModifiedDate=new DateTime(2020, 2, 25), ForDate=new DateTime(2020, 3, 27), PaidStatus=PaidStatus.Credit, OrderStatus=OrderStatus.Complete},
+                new Order{Employee=employees[8], OrderDate=new DateTime(2020, 3, 25), ModifiedDate=new DateTime(2020, 2, 25), ForDate=new DateTime(2020, 3, 28), PaidStatus=PaidStatus.Account, OrderStatus=OrderStatus.Complete},
+                new Order{Employee=employees[0], OrderDate=new DateTime(2020, 3, 25), ModifiedDate=new DateTime(2020, 2, 25), ForDate=new DateTime(2020, 4, 1), PaidStatus=PaidStatus.Cash, OrderStatus=OrderStatus.Complete},
+                new Order{Employee=employees[1], OrderDate=new DateTime(2020, 3, 25), ModifiedDate=new DateTime(2020, 2, 25), ForDate=new DateTime(2020, 4, 2), PaidStatus=PaidStatus.Credit, OrderStatus=OrderStatus.Complete},
+                new Order{Employee=employees[2], OrderDate=new DateTime(2020, 3, 25), ModifiedDate=new DateTime(2020, 2, 25), ForDate=new DateTime(2020, 4, 5), PaidStatus=PaidStatus.Unpaid, OrderStatus=OrderStatus.Complete},
             };
 
             orders.ForEach(s => context.Orders.Add(s));
             context.SaveChanges();
+
+            var orderItems = new List<OrderItem>
+            {
+                new OrderItem{ OrderId = 1, MealConfigurationId=12, Quantity=1 },
+                new OrderItem{ OrderId = 2, MealConfigurationId=11, Quantity=5 },
+                new OrderItem{ OrderId = 3, MealConfigurationId=10, Quantity=1 },
+                new OrderItem{ OrderId = 4, MealConfigurationId=9, Quantity=1 },
+                new OrderItem{ OrderId = 5, MealConfigurationId=8, Quantity=5 },
+                new OrderItem{ OrderId = 6, MealConfigurationId=7, Quantity=1 },
+
+                new OrderItem{ OrderId = 7 , MealConfigurationId=6, Quantity=3 },
+                new OrderItem{ OrderId = 8, MealConfigurationId=5, Quantity=1 },
+                new OrderItem{ OrderId = 9, MealConfigurationId=4, Quantity=1 },
+                new OrderItem{ OrderId = 10, MealConfigurationId=3, Quantity=4 },
+                new OrderItem{ OrderId = 11, MealConfigurationId=2, Quantity=1 },
+                new OrderItem{ OrderId = 12, MealConfigurationId=1, Quantity=2 },
+
+                new OrderItem{ OrderId = 1, MealConfigurationId=2, Quantity=1 },
+                new OrderItem{ OrderId = 2, MealConfigurationId=1, Quantity=5 },
+                new OrderItem{ OrderId = 3, MealConfigurationId=1, Quantity=1 },
+                new OrderItem{ OrderId = 4, MealConfigurationId=4, Quantity=1 },
+                new OrderItem{ OrderId = 5, MealConfigurationId=2, Quantity=5 },
+                new OrderItem{ OrderId = 6, MealConfigurationId=1, Quantity=1 },
+            };
+
+            orderItems.ForEach(s => context.OrderItems.Add(s));
+            context.SaveChanges();
         }
 
-        //  public static async void AddToUsersRoles(List<Employee> employees, List<Caterer> caterers, List<Organizer> organizers, List<Cashier> cashiers, CafeteriaContext context) {
-        public static async Task AddToUsersRoles(ApplicationUser user, CafeteriaContext context, int i)
+    //  public static async void AddToUsersRoles(List<Employee> employees, List<Caterer> caterers, List<Organizer> organizers, List<Cashier> cashiers, CafeteriaContext context) {
+    public static async Task AddToUsersRoles(ApplicationUser user, CafeteriaContext context, int i)
         {
             var userStore = new Microsoft.AspNetCore.Identity.EntityFrameworkCore.UserStore<ApplicationUser>(context);
             switch (i)

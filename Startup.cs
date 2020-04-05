@@ -47,6 +47,8 @@ namespace CafeteriaOnline.Website
                     opt.AccessDeniedPath = "/Identity/Account/AccessDenied";
 
                 });
+            services.AddDistributedMemoryCache();
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -70,6 +72,7 @@ namespace CafeteriaOnline.Website
 
             app.UseAuthentication();
             app.UseAuthorization();
+            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {
