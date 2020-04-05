@@ -19,11 +19,6 @@
                 <span asp-validation-for="EmployeeId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="MealConfigurationId" class="control-label"></label>
-                <select asp-for="MealConfigurationId" class="form-control" asp-items="ViewBag.MealConfigurationId"></select>
-                <span asp-validation-for="MealConfigurationId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="OrderDate" class="control-label"></label>
                 <input asp-for="OrderDate" class="form-control" />
                 <span asp-validation-for="OrderDate" class="text-danger"></span>
@@ -37,11 +32,6 @@
                 <label asp-for="ForDate" class="control-label"></label>
                 <input asp-for="ForDate" class="form-control" />
                 <span asp-validation-for="ForDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Quantity" class="control-label"></label>
-                <input asp-for="Quantity" class="form-control" />
-                <span asp-validation-for="Quantity" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="PaidStatus" class="control-label"></label>
@@ -73,6 +63,3 @@
     <a asp-action="Index">Back to List</a>
 </div>
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
