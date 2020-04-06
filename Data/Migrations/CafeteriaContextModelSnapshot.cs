@@ -504,7 +504,7 @@ namespace CafeteriaOnline.Website.Data.Migrations
             modelBuilder.Entity("CafeteriaOnline.Website.Models.MealConfiguration", b =>
                 {
                     b.HasOne("CafeteriaOnline.Website.Models.Meal", "Meal")
-                        .WithMany("ConfigMealIngredient")
+                        .WithMany("MealConfigurations")
                         .HasForeignKey("MealId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

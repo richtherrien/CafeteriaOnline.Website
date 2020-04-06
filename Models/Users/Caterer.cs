@@ -4,6 +4,6 @@ namespace CafeteriaOnline.Website.Models
 {
     public class Caterer : ApplicationUser
     {
-        public ICollection<Meal> Meal { get; set; }
+        public virtual ICollection<Meal> Meal { get; set; }
     }
 }

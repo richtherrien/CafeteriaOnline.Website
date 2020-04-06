@@ -22,6 +22,6 @@ namespace CafeteriaOnline.Website.Models
         public DateTime ForDate { get; set; }
         public PaidStatus PaidStatus { get; set; }
         public OrderStatus OrderStatus { get; set; }
-        public ICollection<OrderItem> OrderItems { get; set; }
+        public virtual ICollection<OrderItem> OrderItems { get; set; }
     }
 }

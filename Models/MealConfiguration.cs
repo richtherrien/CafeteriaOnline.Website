@@ -9,6 +9,6 @@ namespace CafeteriaOnline.Website.Models
         public virtual Meal Meal { get; set; }
         public string Ingredients { get; set; }
         public decimal Price { get; set; }
-        public ICollection<Order> Order { get; set; }
+        public virtual ICollection<Order> Order { get; set; }
     }
 }

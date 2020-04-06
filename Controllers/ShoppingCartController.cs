@@ -10,11 +10,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CafeteriaOnline.Website.Controllers
 {
-    public class ShoppingCartsController : Controller
+    public class ShoppingCartController : Controller
     {
         private readonly CafeteriaContext _context;
 
-        public ShoppingCartsController(CafeteriaContext context)
+        public ShoppingCartController(CafeteriaContext context)
         {
             _context = context;
         }
