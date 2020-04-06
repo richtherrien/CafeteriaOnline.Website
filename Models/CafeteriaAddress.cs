@@ -15,7 +15,7 @@ namespace CafeteriaOnline.Website.Models
         public string Province { get; set; }
         public string PostalCode { get; set; }
         public string Country { get; set; }
-        public ICollection<CafeteriaFood> CafeteriaFood { get; set; }
-        public ICollection<Employee> Employee { get; set; }
+        public virtual ICollection<CafeteriaFood> CafeteriaFood { get; set; }
+        public virtual ICollection<Employee> Employee { get; set; }
     }
 }

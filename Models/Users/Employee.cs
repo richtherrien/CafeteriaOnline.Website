@@ -4,13 +4,11 @@ namespace CafeteriaOnline.Website.Models
 {
     public class Employee : ApplicationUser
     {
-        public string Name { get; set; }
         public decimal Balance { get; set; }
-        public ICollection<Order> Orders { get; set; }
+        public virtual ICollection<Order> Orders { get; set; }
         public int CafeteriaAddressId { get; set; }
         public virtual CafeteriaAddress CafeteriaAddress { get; set; }
         public int CompanyId { get; set; }
-        public string CompanyCode { get; set; }
         public virtual Company Company { get; set; }
     }
 }

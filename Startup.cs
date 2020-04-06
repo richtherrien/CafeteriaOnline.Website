@@ -30,7 +30,7 @@ namespace CafeteriaOnline.Website
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<CafeteriaContext>(options =>
-                options.UseSqlServer(
+                options.UseLazyLoadingProxies().UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddIdentity<ApplicationUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)

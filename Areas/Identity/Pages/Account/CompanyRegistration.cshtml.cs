@@ -2,18 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Text;
-using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using CafeteriaOnline.Website.Data;
 using CafeteriaOnline.Website.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 
 namespace CafeteriaOnline.Website.Areas.Identity.Pages.Account
@@ -129,26 +125,26 @@ namespace CafeteriaOnline.Website.Areas.Identity.Pages.Account
             {
                 Company comp = new Company { Name = Input.CompanyName, Telephone = Input.Telephone, CompanyCode = CompanyCodeGen(Input.CompanyName) };
                 _context.Companies.Add(comp);
-                _context.SaveChanges();
 
                 CafeteriaAddress address = new CafeteriaAddress { StreetAddress = Input.StreetAddress, City = Input.City, Province = Input.Province, Country = Input.Country, PostalCode = Input.PostalCode, Company = comp};
                 _context.CafeteriaAddresses.Add(address);
-                _context.SaveChanges();
 
                 var user = new Organizer { UserName = Input.Email, Email = Input.Email, Company = comp, CafeteriaAddress = address, FirstName = Input.FirstName, LastName = Input.LastName};
                 _context.Organizers.Add(user);
 
                 var result = await _userManager.CreateAsync(user, Input.Password);
+
                 if (result.Succeeded)
                 {
+                    await _context.SaveChangesAsync();
                     await _userManager.AddToRoleAsync(user, "Organizer");
 
                     _logger.LogInformation("User created a new account with password.");
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
-                        return RedirectToPage("RegisterConfirmation", new { email = Input.Email });
                         await _context.SaveChangesAsync();
+                        return RedirectToPage("RegisterConfirmation", new { email = Input.Email });
                     }
                     else
                     {

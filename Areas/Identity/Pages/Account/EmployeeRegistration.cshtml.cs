@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -51,26 +52,10 @@ namespace CafeteriaOnline.Website.Areas.Identity.Pages.Account
             [Display(Name = "Last Name")]
             public string LastName { get; set; }
 
-            public string Name
-            {
-                get
-                {
-                    string Name = FirstName;
-                    if (!string.IsNullOrEmpty(LastName))
-                    {
-                        FirstName = " " + LastName;
-                    }
-                    return Name;
-                }
-            }
-
             [Required]
+            [Phone]
             [Display(Name = "Telephone")]
-            public int Telephone { get; set; }
-
-            [Required]
-            [Display(Name = "Employee ID")]
-            public string CompanyID { get; set; }
+            public string Telephone { get; set; }
 
             [Required]
             [Display(Name = "CompanyCode")]
@@ -105,21 +90,20 @@ namespace CafeteriaOnline.Website.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new Employee { UserName = Input.Email, Email = Input.Email };
-
-                Company comp = _context.Companies.Where(p => p.CompanyCode == Input.CompanyCode).FirstOrDefault();
-
-                //omp.Employees.Add(user);
-                user.CompanyId = comp.CompanyId;
-
+                var user = new Employee { UserName = Input.Email, Email = Input.Email, FirstName = Input.FirstName, 
+                    LastName = Input.LastName, PhoneNumber = Input.Telephone };
+                var company = _context.Companies.Include(m => m.CafeteriaAddresses).FirstOrDefault(p => p.CompanyCode == Input.CompanyCode);
+                if (company == null) {
+                    ModelState.AddModelError(string.Empty, "Company Code does not match a vaild code");
+                    return Page();
+                }
+                user.CompanyId = company.CompanyId;
+                user.CafeteriaAddressId = company.CafeteriaAddresses.First().CafeteriaAddressId;
 
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
                     await _userManager.AddToRoleAsync(user, "Employee");
-
-
-
 
                     _logger.LogInformation("User created a new account with password.");
 

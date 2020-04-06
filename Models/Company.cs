@@ -8,7 +8,7 @@ namespace CafeteriaOnline.Website.Models
         public string Name { get; set; }
         public string Telephone { get; set; }
         public string CompanyCode { get; set; }
-        public virtual ICollection<CafeteriaAddress> Addresses { get; set; }
+        public virtual ICollection<CafeteriaAddress> CafeteriaAddresses { get; set; }
         public virtual ICollection<Employee> Employees { get; set; }
     }
 }

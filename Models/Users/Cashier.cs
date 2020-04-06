@@ -4,6 +4,6 @@ namespace CafeteriaOnline.Website.Models
 {
     public class Cashier : ApplicationUser
     {
-        public ICollection<CafeteriaAddress> CafeteriaAddress { get; set; }
+        public virtual ICollection<CafeteriaAddress> CafeteriaAddress { get; set; }
     }
 }
