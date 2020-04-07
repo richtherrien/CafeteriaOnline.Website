@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace CafeteriaOnline.Website.Models
 {
@@ -19,6 +20,7 @@ namespace CafeteriaOnline.Website.Models
         public virtual Employee Employee { get; set; }
         public DateTime OrderDate { get; set; }
         public DateTime ModifiedDate { get; set; }
+        [Required]
         public DateTime ForDate { get; set; }
         public PaidStatus PaidStatus { get; set; }
         public OrderStatus OrderStatus { get; set; }

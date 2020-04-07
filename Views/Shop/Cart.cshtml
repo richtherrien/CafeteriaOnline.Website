@@ -1,0 +1,73 @@
+﻿@model CafeteriaOnline.Website.Models.Order
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Description
+            </th>
+            <th>
+                Ingredients
+            </th>
+            <th>
+                Quantity
+            </th>
+            <th>
+                Price
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in ViewBag.cart)
+        {
+            <tr>
+                <td>
+                    @item.MealConfiguration.Meal.Name
+                </td>
+                <td>
+                    @item.MealConfiguration.Meal.Description
+                </td>
+                <td>
+                    @item.MealConfiguration.Ingredients
+                </td>
+                <td>
+                    @item.Quantity
+                </td>
+                <td>
+                    $@item.MealConfiguration.Price
+                </td>
+                <td>
+                    <a asp-action="Add" asp-route-id="@item.MealConfiguration.MealConfigurationId"><i class="fa fa-plus"></i></a>|
+                    <a asp-action="Remove" asp-route-id="@item.MealConfiguration.MealConfigurationId"><i class="fa fa-minus"></i></a>|
+                    <a asp-action="Delete" asp-route-id="@item.MealConfiguration.MealConfigurationId">DELETE</a>
+
+                </td>
+            </tr>
+        }
+        <tr>
+            <td><b>Total</b></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+                $@ViewBag.total
+            </td>
+        </tr>
+    </tbody>
+</table>
+<form method="post" asp-validation-summary="ModelOnly">
+    <div class="form-group">
+        <label asp-for="ForDate" class="control-label"></label>
+        <input asp-for="ForDate" type="date" class="form-control" />
+        <span asp-validation-for="ForDate" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Order</button>
+</form>
