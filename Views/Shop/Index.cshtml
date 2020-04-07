@@ -1,0 +1,74 @@
+﻿@model CafeteriaOnline.Website.Models.Meal
+@{
+    ViewData["Title"] = "Shop";
+}
+    <div style="font-size: 2rem;">
+        <a asp-action="Cart">
+            <i class="fa fa-shopping-cart fa-9x"></i>
+            Cart
+            @ViewBag.count
+        </a>
+    </div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+
+            </th>
+            <th>
+                MealType
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                Description
+            </th>
+            <th>
+                ValidUntil
+            </th>
+            <th>
+                MealConfigurations
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in ViewBag.meals)
+        {
+            <tr>
+                <td>
+                    <a href="@item.ImageUrl">
+                        <img src="@item.ImageUrl" style="position:relative;width:40px;height:40px;overflow:hidden;border-radius:50%;" />
+                    </a>
+                </td>
+                <td>
+                    @item.MealType
+                </td>
+                <td>
+                    @item.Name
+                </td>
+                <td>
+                    @item.Description
+                </td>
+                <td>
+                    @item.ValidUntil
+                </td>
+                <td>
+                    <select class="form-control">
+                        @foreach (var mealConfiguration in item.MealConfigurations)
+                        {
+                            <option value="@mealConfiguration.MealConfigurationId">  @mealConfiguration.Ingredients</option>
+                        }
+                    </select>
+                </td>
+                <td>
+                    <a style="display: inline-block; padding: 4px 8px; color: white; background-color:limegreen; border-width: 2px;  border-radius:20%;"
+                       asp-action="AddItem" asp-route-id="@item.MealId">Add</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

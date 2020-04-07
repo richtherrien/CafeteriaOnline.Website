@@ -2,16 +2,6 @@
 {
     public class OrderItem
     {
-        internal object cart;
-
-        public OrderItem(int mealConfigurationId, int quantity)
-        {
-            MealConfigurationId = mealConfigurationId;
-            Quantity = quantity;
-        }
-        public OrderItem()
-        {
-        }
         public int OrderItemId { get; set; }
         public int OrderId { get; set; }
         public virtual Order Order { get; set; }
