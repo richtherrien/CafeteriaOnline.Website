@@ -25,6 +25,8 @@ namespace CafeteriaOnline.Website.Areas.Identity.Pages.Account.Manage
 
         public string Username { get; set; }
 
+        public string CompanyCode { get; set; }
+
         [TempData]
         public string StatusMessage { get; set; }
 
@@ -41,14 +43,20 @@ namespace CafeteriaOnline.Website.Areas.Identity.Pages.Account.Manage
         private async Task LoadAsync(ApplicationUser user)
         {
             var userName = await _userManager.GetUserNameAsync(user);
+
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
 
-            Username = userName;
-
+            if (User.IsInRole("Employee") || User.IsInRole("Employee"))
+            {
+                Employee employee = (Employee)await _userManager.GetUserAsync(HttpContext.User);
+                CompanyCode = employee.Company.CompanyCode;
+    
+            }
             Input = new InputModel
             {
                 PhoneNumber = phoneNumber
             };
+            Username = userName;
         }
 
         public async Task<IActionResult> OnGetAsync()
