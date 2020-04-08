@@ -58,7 +58,7 @@ namespace CafeteriaOnline.Website.Areas.Identity.Pages.Account
             public string Telephone { get; set; }
 
             [Required]
-            [Display(Name = "CompanyCode")]
+            [Display(Name = "Company Code")]
             public string CompanyCode { get; set; }
 
             [Required]
