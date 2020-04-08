@@ -24,8 +24,16 @@ namespace CafeteriaOnline.Website.Areas.Identity.Pages.Account.Manage
         }
 
         public string Username { get; set; }
-
         public string CompanyCode { get; set; }
+        public string CompanyName { get; set; }
+        public string FirstName { get; set; }        
+        public string LastName { get; set; }
+        public string StreetAddress { get; set; }
+        public string StreetAddress2 { get; set; }
+        public string City { get; set; }
+        public string Province { get; set; }
+        public string PostalCode { get; set; }
+        public string Country { get; set; }
 
         [TempData]
         public string StatusMessage { get; set; }
@@ -35,6 +43,7 @@ namespace CafeteriaOnline.Website.Areas.Identity.Pages.Account.Manage
 
         public class InputModel
         {
+       
             [Phone]
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
@@ -43,14 +52,23 @@ namespace CafeteriaOnline.Website.Areas.Identity.Pages.Account.Manage
         private async Task LoadAsync(ApplicationUser user)
         {
             var userName = await _userManager.GetUserNameAsync(user);
-
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
+            FirstName = user.FirstName;
+            LastName = user.LastName;
 
-            if (User.IsInRole("Employee") || User.IsInRole("Employee"))
+            if (User.IsInRole("Organizer") || User.IsInRole("Employee"))
             {
-                Employee employee = (Employee)await _userManager.GetUserAsync(HttpContext.User);
+                Employee employee = (Employee)user;
                 CompanyCode = employee.Company.CompanyCode;
-    
+                CompanyName = employee.Company.Name;
+                StreetAddress = employee.Company.CafeteriaAddresses.FirstOrDefault().StreetAddress;
+                StreetAddress2 = employee.Company.CafeteriaAddresses.FirstOrDefault().StreetAddress2;
+                City = employee.Company.CafeteriaAddresses.FirstOrDefault().City;
+                Province = employee.Company.CafeteriaAddresses.FirstOrDefault().Province;
+                PostalCode = employee.Company.CafeteriaAddresses.FirstOrDefault().PostalCode;
+                Country = employee.Company.CafeteriaAddresses.FirstOrDefault().Country;
+
+
             }
             Input = new InputModel
             {
