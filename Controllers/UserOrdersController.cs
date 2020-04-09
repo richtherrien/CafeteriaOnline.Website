@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using CafeteriaOnline.Website.Data;
 using CafeteriaOnline.Website.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace CafeteriaOnline.Website.Controllers
 {
@@ -15,17 +16,20 @@ namespace CafeteriaOnline.Website.Controllers
     public class UserOrdersController : Controller
     {
         private readonly CafeteriaContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public UserOrdersController(CafeteriaContext context)
+        public UserOrdersController(CafeteriaContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: UserOrders
         public async Task<IActionResult> Index()
         {
-            var cafeteriaContext = _context.Orders.Include(o => o.Employee);
-            return View(await cafeteriaContext.ToListAsync());
+            Employee employee = (Employee)await _userManager.GetUserAsync(HttpContext.User);
+            var orders = employee.Orders.ToList();
+            return View(orders);
         }
 
         // GET: UserOrders/Details/5
