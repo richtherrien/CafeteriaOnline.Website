@@ -1,0 +1,54 @@
+﻿@model IEnumerable<CafeteriaOnline.Website.Models.Order>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Your Orders</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>OrderID</th>
+            <th>Placed On</th>
+            <th>Placed For</th>
+            <th>Order Items</th>
+            <th>Paid Status</th>
+            <th>Options</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var order in Model) {
+        <tr>
+            <td>
+                @order.OrderId
+            </td>
+            <td>
+                @order.OrderDate
+            </td>
+            <td>
+                @order.ForDate
+            </td>
+            <td>
+                @foreach(var oItem in order.OrderItems)
+                {
+                    @foreach(var name in oItem.MealConfiguration.Meal.Name)
+                    {
+                        @name
+                    }
+                    <h1> </h1>
+                }
+            </td>
+            <td>
+                @order.PaidStatus
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@order.OrderId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@order.OrderId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@order.OrderId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
