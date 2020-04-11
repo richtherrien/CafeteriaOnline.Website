@@ -1,14 +1,14 @@
-﻿@model CafeteriaOnline.Website.Models.Meal
+﻿@model CafeteriaOnline.Website.Models.Order
 @{
     ViewData["Title"] = "Shop";
 }
-    <div style="font-size: 2rem;">
-        <a asp-action="Cart">
-            <i class="fa fa-shopping-cart fa-9x"></i>
-            Cart
-            @ViewBag.count
-        </a>
-    </div>
+<div style="font-size: 2rem;">
+    <a asp-action="Cart">
+        <i class="fa fa-shopping-cart fa-9x"></i>
+        Cart
+        @ViewBag.count
+    </a>
+</div>
 
 <table class="table">
     <thead>
@@ -29,7 +29,7 @@
                 ValidUntil
             </th>
             <th>
-                MealConfigurations
+                Price
             </th>
             <th></th>
         </tr>
@@ -55,19 +55,30 @@
                 <td>
                     @item.ValidUntil
                 </td>
-                <td>
-                    <select class="form-control">
-                        @foreach (var mealConfiguration in item.MealConfigurations)
-                        {
-                            <option value="@mealConfiguration.MealConfigurationId">  @mealConfiguration.Ingredients</option>
-                        }
-                    </select>
-                </td>
-                <td>
-                    <a style="display: inline-block; padding: 4px 8px; color: white; background-color:limegreen; border-width: 2px;  border-radius:20%;"
-                       asp-action="AddItem" asp-route-id="@item.MealId">Add</a>
-                </td>
+
+
             </tr>
+            @foreach (var mealConfiguration in item.MealConfigurations)
+            {
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        @mealConfiguration.Ingredients
+                    </td>
+                    <td></td>
+                    <td>
+                        $@mealConfiguration.Price
+                    </td>
+                    <td>
+                        <a style="display: inline-block; padding: 4px 8px; color: white; background-color:limegreen; border-width: 2px;  border-radius:20%;"
+                           asp-action="AddItem" asp-route-id="@mealConfiguration.MealConfigurationId">Add</a>
+                    </td>
+                </tr>
+
+
+            }
         }
     </tbody>
 </table>

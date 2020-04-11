@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace CafeteriaOnline.Website.Models
 {
@@ -24,6 +25,11 @@ namespace CafeteriaOnline.Website.Models
         public DateTime ForDate { get; set; }
         public PaidStatus PaidStatus { get; set; }
         public OrderStatus OrderStatus { get; set; }
-        public virtual ICollection<OrderItem> OrderItems { get; set; }
+        public virtual List<OrderItem> OrderItems { get; set; }
+
+        public decimal GetTotalPrice()
+        {
+            return OrderItems.Sum(item => item.MealConfiguration.Price * item.Quantity);
+        }
     }
 }

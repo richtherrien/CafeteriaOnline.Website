@@ -6,7 +6,12 @@
 
 <h1>Your Orders</h1>
 
-
+@if (!ViewData.ModelState.IsValid && ViewData.ModelState["Error"].Errors.Count > 0)
+{
+    <div class="alert alert-">
+        <strong>Error!</strong> danger">@ViewData.ModelState["Error"].Errors.First().ErrorMessage
+    </div>
+}
 <table class="table">
     <thead>
         <tr>
@@ -15,40 +20,51 @@
             <th>Placed For</th>
             <th>Order Items</th>
             <th>Paid Status</th>
+            <th>Total Price</th>
             <th>Options</th>
         </tr>
     </thead>
     <tbody>
-@foreach (var order in Model) {
-        <tr>
-            <td>
-                @order.OrderId
-            </td>
-            <td>
-                @order.OrderDate
-            </td>
-            <td>
-                @order.ForDate
-            </td>
-            <td>
-                @foreach(var oItem in order.OrderItems)
-                {
-                    @foreach(var name in oItem.MealConfiguration.Meal.Name)
+        @foreach (var order in Model)
+        {
+            <tr>
+                <td>
+                    @order.OrderId
+                </td>
+                <td>
+                    @DateTime.Now.Date
+                </td>
+                <td>
+                    @order.ForDate.Date
+                </td>
+                <td>
+                    @foreach (var oItem in order.OrderItems)
                     {
-                        @name
+                        @foreach (var name in oItem.MealConfiguration.Meal.Name)
+                        {
+                            @name
+                        }
+                        <h1> </h1>
                     }
-                    <h1> </h1>
-                }
-            </td>
-            <td>
-                @order.PaidStatus
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@order.OrderId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@order.OrderId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@order.OrderId">Delete</a>
-            </td>
-        </tr>
-}
+                </td>
+                <td>
+                    @order.PaidStatus
+                </td>
+                <td>
+                    $@order.GetTotalPrice()
+                </td>
+                <td>
+
+                    <a asp-action="Details" asp-route-id="@order.OrderId">Details</a>
+                    @if (DateTime.Compare(DateTime.Now.Date, order.ForDate.Date) <= 0)
+                    {
+                        <span>|</span>
+                        <a asp-action="Edit" asp-route-id="@order.OrderId">Edit</a>
+                        <span>|</span>
+                        <a asp-action="Delete" asp-route-id="@order.OrderId">Delete</a>
+                    }
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
