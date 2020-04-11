@@ -54,10 +54,12 @@
                     $@order.GetTotalPrice()
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@order.OrderId">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@order.OrderId">Details</a> 
+
+                    <a asp-action="Details" asp-route-id="@order.OrderId">Details</a>
                     @if (DateTime.Compare(DateTime.Now.Date, order.ForDate.Date) <= 0)
                     {
+                        <span>|</span>
+                        <a asp-action="Edit" asp-route-id="@order.OrderId">Edit</a>
                         <span>|</span>
                         <a asp-action="Delete" asp-route-id="@order.OrderId">Delete</a>
                     }

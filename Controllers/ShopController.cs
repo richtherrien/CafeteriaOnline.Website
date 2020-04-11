@@ -84,7 +84,7 @@ namespace CafeteriaOnline.Website.Controllers
                 for (int i = 0; i < cart.ToList().Count; i++)
                 {
                     // make sure the item will still be valid on the date it is ordered
-                    if (cart[i].MealConfiguration.Meal.ValidUntil.Date < order.ForDate.Date)
+                    if (DateTime.Compare(cart[i].MealConfiguration.Meal.ValidUntil.Date, order.ForDate.Date) < 0)
                     {
                         ModelState.AddModelError("ForDate", "Cart items must be valid on the ForDate " + cart[i].MealConfiguration.Meal.Name.ToString());
                         return View();

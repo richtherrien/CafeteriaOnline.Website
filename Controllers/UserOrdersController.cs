@@ -28,8 +28,11 @@ namespace CafeteriaOnline.Website.Controllers
         public async Task<IActionResult> Index()
         {
             Employee employee = (Employee)await _userManager.GetUserAsync(HttpContext.User);
-            var orders = employee.Orders.ToList();
-            return View(orders);
+            if (employee.Orders != null) {
+                var orders = employee.Orders.ToList();
+                return View(orders);
+            }
+            return View();
         }
 
         // GET: UserOrders/Details/5
@@ -43,29 +46,13 @@ namespace CafeteriaOnline.Website.Controllers
             var order = await _context.Orders
                 .Include(o => o.Employee)
                 .FirstOrDefaultAsync(m => m.OrderId == id);
-            if (order == null)
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+
+            if (order == null || order.EmployeeId != user.Id)
             {
                 return NotFound();
             }
 
-            return View(order);
-        }
-
-
-        // POST: UserOrders/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("OrderId,EmployeeId,OrderDate,ModifiedDate,ForDate,PaidStatus,OrderStatus")] Order order)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(order);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["EmployeeId"] = new SelectList(_context.Employees, "Id", "Id", order.EmployeeId);
             return View(order);
         }
 
@@ -76,9 +63,9 @@ namespace CafeteriaOnline.Website.Controllers
             {
                 return NotFound();
             }
-
+            var user = await _userManager.GetUserAsync(HttpContext.User);
             var order = await _context.Orders.FindAsync(id);
-            if (order == null)
+            if (order == null || order.EmployeeId != user.Id)
             {
                 return NotFound();
             }
@@ -91,35 +78,66 @@ namespace CafeteriaOnline.Website.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("OrderId,EmployeeId,OrderDate,ModifiedDate,ForDate,PaidStatus,OrderStatus")] Order order)
+        public async Task<IActionResult> Edit(int id,  Order newOrder)
         {
-            if (id != order.OrderId)
+            DateTime localDate = DateTime.Now.Date;
+
+            if (id != newOrder.OrderId)
+            {
+                return NotFound();
+            }
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            else if (DateTime.Compare(newOrder.ForDate.Date, localDate) <= 0)
+            {
+                // make sure it is at least one day ahead
+                ModelState.AddModelError("ForDate", "Date must be in advance");
+                return RedirectToAction(nameof(Index));
+            }
+
+            Employee user = (Employee)await _userManager.GetUserAsync(HttpContext.User);
+            var order = user.Orders.FirstOrDefault(item => item.OrderId == id);
+            if (order == null)
             {
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            for (int i = 0; i < newOrder.OrderItems.Count; i++)
             {
-                try
+                //Console.WriteLine(newOrder.OrderItems[i].MealConfiguration.Meal.V);
+
+                if (DateTime.Compare(newOrder.OrderItems[i].MealConfiguration.Meal.ValidUntil.Date, order.ForDate.Date) < 0)
                 {
-                    _context.Update(order);
-                    await _context.SaveChangesAsync();
+                    ModelState.AddModelError("ForDate", "Date must be in advance");
+
+                    return RedirectToAction(nameof(Index));
                 }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!OrderExists(order.OrderId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
             }
-            ViewData["EmployeeId"] = new SelectList(_context.Employees, "Id", "Id", order.EmployeeId);
-            return View(order);
+
+            for (int i = 0; i < newOrder.OrderItems.Count; i++)
+            {
+                // if quantity is set to 0 delete
+                if (newOrder.OrderItems[i].Quantity <= 0)
+                {
+                    newOrder.OrderItems.RemoveAt(i);
+                    order.OrderItems.RemoveAt(i);
+
+                }
+            }
+
+            for (int i = 0; i < newOrder.OrderItems.Count; i++)
+            {
+                order.OrderItems[i].Quantity = newOrder.OrderItems[i].Quantity;
+            }
+              
+            order.ForDate = newOrder.ForDate;
+            order.ModifiedDate = DateTime.Now.Date;
+            _context.Update(order);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: UserOrders/Delete/5
@@ -129,11 +147,12 @@ namespace CafeteriaOnline.Website.Controllers
             {
                 return NotFound();
             }
-
+            var user = await _userManager.GetUserAsync(HttpContext.User);
             var order = await _context.Orders
                 .Include(o => o.Employee)
                 .FirstOrDefaultAsync(m => m.OrderId == id);
-            if (order == null)
+            // make sure the order belongs to user
+            if (order == null || order.EmployeeId != user.Id)
             {
                 return NotFound();
             }
