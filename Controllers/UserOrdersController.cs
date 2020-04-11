@@ -51,12 +51,6 @@ namespace CafeteriaOnline.Website.Controllers
             return View(order);
         }
 
-        // GET: UserOrders/Create
-        public IActionResult Create()
-        {
-            ViewData["EmployeeId"] = new SelectList(_context.Employees, "Id", "Id");
-            return View();
-        }
 
         // POST: UserOrders/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
@@ -152,7 +146,13 @@ namespace CafeteriaOnline.Website.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            var user = await _userManager.GetUserAsync(HttpContext.User);
             var order = await _context.Orders.FindAsync(id);
+
+            if (order.EmployeeId != user.Id)
+                return NotFound();
+            else if (DateTime.Compare(order.ForDate.Date, DateTime.Now.Date) <= 0)
+                return RedirectToAction(nameof(Index));
             _context.Orders.Remove(order);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
