@@ -88,7 +88,6 @@ namespace CafeteriaOnline.Website.Controllers
             }
             else if (!ModelState.IsValid)
             {
-                ModelState.AddModelError("ForDate", "Date must be 3 days in advance");
                 return View(newOrder);
             }
             else if ((newOrder.ForDate.Date - localDate).TotalDays < 3)
@@ -108,10 +107,12 @@ namespace CafeteriaOnline.Website.Controllers
 
             for (int i = 0; i < newOrder.OrderItems.Count; i++)
             {
-                if (DateTime.Compare(newOrder.OrderItems[i].MealConfiguration.Meal.ValidUntil.Date, order.ForDate.Date) < 0)
+                if (DateTime.Compare(newOrder.OrderItems[i].MealConfiguration.Meal.ValidUntil.Date, newOrder.ForDate.Date) < 0)
                 {
                     ModelState.AddModelError("ForDate", "Meal is no longer valid on that date");
-                    return View(newOrder);
+                    var prevOrder = await _context.Orders.FindAsync(id);
+
+                    return View(prevOrder);
                 }
             }
 
