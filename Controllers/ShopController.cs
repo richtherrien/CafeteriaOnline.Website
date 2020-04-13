@@ -25,16 +25,13 @@ namespace CafeteriaOnline.Website.Controllers
         }
 
         // GET: Shop
-        public async Task<IActionResult> Index([Bind("ForDate")] Order order)
+        public async Task<IActionResult> Index()
         {
-            DateTime localDate = DateTime.Now.Date;
-            if (order.ForDate != null)
-            {
-                localDate = order.ForDate.Date;
-            }
+            DateTime localDate = DateTime.Today;
+
             var cart = GetCart();
             ViewBag.cart = cart;
-            ViewBag.meals = await _context.Meals.Include(item => item.MealConfigurations).Where(item => item.ValidUntil > localDate).ToListAsync();
+            ViewBag.meals = await _context.Meals.Include(item => item.MealConfigurations).Where(item => item.ValidUntil.Date > localDate).ToListAsync();
             ViewBag.count = cart.Sum(item => item.Quantity);
             return View();
         }

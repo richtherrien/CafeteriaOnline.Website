@@ -34,7 +34,7 @@
         }
         else
         {
-            @if (User.IsInRole("Employee,Organizer"))
+            @if (User.IsInRole("Employee") || User.IsInRole("Organizer"))
             {
                 <div class="flex-1 text-gray-700 text-3xl font-bold text-center bg-green-300 border-2 border-green-800 px-4 py-2 m-2 shadow-lg rounded">
                     Order Now!
