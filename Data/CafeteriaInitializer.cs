@@ -216,9 +216,19 @@ namespace CafeteriaOnline.Website.Data
 
             orderItems.ForEach(s => context.OrderItems.Add(s));
             context.SaveChanges();
+
+            var cafeteriaFoods = new List<CafeteriaFood>
+            {
+                new CafeteriaFood{ CafeteriaAddressId = 1, MealType=MealType.Dessert, Name="cake", Price=3.99m },
+                new CafeteriaFood{ CafeteriaAddressId = 2, MealType=MealType.Dessert, Name="chocolate", Price=2.99m },
+                new CafeteriaFood{ CafeteriaAddressId = 3, MealType=MealType.Beverage, Name="coffee", Price=1.99m },
+
+            };
+
+            cafeteriaFoods.ForEach(s => context.CafeteriaFoods.Add(s));
+            context.SaveChanges();
         }
 
-    //  public static async void AddToUsersRoles(List<Employee> employees, List<Caterer> caterers, List<Organizer> organizers, List<Cashier> cashiers, CafeteriaContext context) {
     public static async Task AddToUsersRoles(ApplicationUser user, CafeteriaContext context, int i)
         {
             var userStore = new Microsoft.AspNetCore.Identity.EntityFrameworkCore.UserStore<ApplicationUser>(context);

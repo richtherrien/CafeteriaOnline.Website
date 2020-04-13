@@ -55,8 +55,8 @@
                 <td>
                     @item.ValidUntil
                 </td>
-
-
+                <td></td>
+                <td></td>
             </tr>
             @foreach (var mealConfiguration in item.MealConfigurations)
             {
@@ -76,10 +76,7 @@
                            asp-action="AddItem" asp-route-id="@mealConfiguration.MealConfigurationId">Add</a>
                     </td>
                 </tr>
-
-
             }
         }
     </tbody>
 </table>
-

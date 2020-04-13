@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace CafeteriaOnline.Website.Controllers
 {
-    [Authorize(Roles = "Employee")]
+    [Authorize(Roles = "Employee,Organizer")]
     public class UserOrdersController : Controller
     {
         private readonly CafeteriaContext _context;
@@ -106,8 +106,6 @@ namespace CafeteriaOnline.Website.Controllers
 
             for (int i = 0; i < newOrder.OrderItems.Count; i++)
             {
-                //Console.WriteLine(newOrder.OrderItems[i].MealConfiguration.Meal.V);
-
                 if (DateTime.Compare(newOrder.OrderItems[i].MealConfiguration.Meal.ValidUntil.Date, order.ForDate.Date) < 0)
                 {
                     ModelState.AddModelError("ForDate", "Date must be in advance");
@@ -167,10 +165,10 @@ namespace CafeteriaOnline.Website.Controllers
         {
             var user = await _userManager.GetUserAsync(HttpContext.User);
             var order = await _context.Orders.FindAsync(id);
-
+            // can delete if the 
             if (order.EmployeeId != user.Id)
                 return NotFound();
-            else if (DateTime.Compare(order.ForDate.Date, DateTime.Now.Date) <= 0)
+            else if (DateTime.Compare(order.ForDate.Date, DateTime.Now.Date) < 0)
                 return RedirectToAction(nameof(Index));
             _context.Orders.Remove(order);
             await _context.SaveChangesAsync();

@@ -9,7 +9,7 @@ namespace CafeteriaOnline.Website.Models
         public virtual Order Order { get; set; }
         public int MealConfigurationId { get; set; }
         public virtual MealConfiguration MealConfiguration { get; set; }
-        [Range(0, 50)]
+        [Range(0, 25)]
         public int Quantity { get; set; }
         public decimal GetOrderItemPrice()
         {

@@ -40,11 +40,15 @@
                 <td>
                     @foreach (var oItem in order.OrderItems)
                     {
-                        @foreach (var name in oItem.MealConfiguration.Meal.Name)
-                        {
-                            @name
-                        }
-                        <h1> </h1>
+                        <span>
+                            @oItem.MealConfiguration.Meal.Name
+                        </span>
+                        <span>
+                           x
+                        </span>
+                        <span>
+                            @oItem.Quantity
+                        </span>
                     }
                 </td>
                 <td>
