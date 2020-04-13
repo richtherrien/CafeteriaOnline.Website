@@ -86,15 +86,17 @@ namespace CafeteriaOnline.Website.Controllers
             {
                 return NotFound();
             }
-            if (!ModelState.IsValid)
+            else if (!ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                ModelState.AddModelError("ForDate", "Date must be 3 days in advance");
+                return View(newOrder);
             }
-            else if (DateTime.Compare(newOrder.ForDate.Date, localDate) <= 0)
+            else if ((newOrder.ForDate.Date - localDate).TotalDays < 3)
             {
                 // make sure it is at least one day ahead
-                ModelState.AddModelError("ForDate", "Date must be in advance");
-                return RedirectToAction(nameof(Index));
+                var prevOrder = await _context.Orders.FindAsync(id);
+                ModelState.AddModelError("ForDate", "Date must be 3 days in advance");
+                return View(prevOrder);
             }
 
             Employee user = (Employee)await _userManager.GetUserAsync(HttpContext.User);
@@ -108,9 +110,8 @@ namespace CafeteriaOnline.Website.Controllers
             {
                 if (DateTime.Compare(newOrder.OrderItems[i].MealConfiguration.Meal.ValidUntil.Date, order.ForDate.Date) < 0)
                 {
-                    ModelState.AddModelError("ForDate", "Date must be in advance");
-
-                    return RedirectToAction(nameof(Index));
+                    ModelState.AddModelError("ForDate", "Meal is no longer valid on that date");
+                    return View(newOrder);
                 }
             }
 
