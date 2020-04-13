@@ -52,6 +52,23 @@
             @Html.DisplayFor(model => model.OrderStatus)
         </dd>
         <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.OrderItems)
+        </dt>
+        <dd class="col-sm-10">
+            @foreach (var item in Model.OrderItems)
+            {
+                <span>
+                    @item.MealConfiguration.Meal.Name
+                </span>
+                <span>
+                    x
+                </span>
+                <span>
+                    @item.Quantity
+                </span> 
+            }
+        </dd>
+        <dt class="col-sm-2">
             Barcode
         </dt>
         <dd class="col-sm-10">

@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace CafeteriaOnline.Website.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Employee,Organizer")]
     public class ShopController : Controller
     {
         private readonly CafeteriaContext _context;
@@ -65,10 +65,10 @@ namespace CafeteriaOnline.Website.Controllers
                 ModelState.AddModelError("ForDate", "Please enter a date");
                 return View();
             }
-            else if (DateTime.Compare(order.ForDate.Date, localDate) <= 0)
+            else if ((order.ForDate.Date - localDate).TotalDays < 3)
             {
                 // make sure it is at least one day ahead
-                ModelState.AddModelError("ForDate", "Date must be in advance");
+                ModelState.AddModelError("ForDate", "Date must be 3 days in advance");
                 return View();
             }
             else if (cart.ToList().Count < 1)
@@ -130,7 +130,6 @@ namespace CafeteriaOnline.Website.Controllers
         public async Task<IActionResult> AddItem(int id)
         {
             var result = await AddItemToCart(id);
-            Console.WriteLine("Esult" + result);
 
             if (!result)
             {
@@ -158,7 +157,8 @@ namespace CafeteriaOnline.Website.Controllers
             }
             else
             {
-                cart[index].Quantity++;
+                if (cart[index].Quantity < 25)
+                    cart[index].Quantity++;
             }
             SessionHelper.Set(HttpContext.Session, "cart", cart);
 
